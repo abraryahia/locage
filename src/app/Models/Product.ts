@@ -1,5 +1,5 @@
 export interface Product {
-  id:any;
+  _id:any;
   title:string;
   color:string[];
   description:string;
@@ -12,11 +12,10 @@ export interface Product {
   Weight:number;
   photos:string[];
   rating:number;
-  UnitePerOrder:number;
   discount: number;
-  discountDate:string;
+  discountDate:any;
   brand:string;
-  proudactSpecification:string;
+  productSpecifications:string;
 
 
 }

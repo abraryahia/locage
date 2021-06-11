@@ -9,7 +9,9 @@ import {
   NbInputModule,
   NbDatepickerModule,
   NbPopoverModule,
-  NbAlertModule
+  NbAlertModule,
+  NbActionsModule,
+  NbIconModule,
 } from "@nebular/theme";
 
 import { NgModule } from '@angular/core';
@@ -33,6 +35,9 @@ import { CategoryService } from '../Services/Category.service';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { EditorsModule } from './../pages/editors/editors.module';
 import { ProductService } from './../Services/Product.service';
+import { Ng2SmartTableModule } from "ng2-smart-table";
+
+import { FormEditProductComponent } from "./Product/EditProduct/FormEditProduct/FormEditProduct.component";
 
 
 
@@ -57,13 +62,18 @@ import { ProductService } from './../Services/Product.service';
     FormsModule,
     NbPopoverModule,
     ReactiveFormsModule,
-    NbAlertModule
+    NbAlertModule,
+    Ng2SmartTableModule,
+    NbActionsModule,
+    NbIconModule,
+
   ],
   declarations: [
     VendorComponent, AddProductComponent,
     EditProductComponent, ManageImageComponent,
     OrderComponent, PromotionComponent,
-    SalesReportsComponent, CatalogPerformanceComponent
+    SalesReportsComponent, CatalogPerformanceComponent,
+  FormEditProductComponent
   ],
 
 

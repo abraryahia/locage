@@ -40,26 +40,46 @@
       </nb-step>
 
       <!--=============================== product Inforamtion =============================-->
-      <nb-step [label]="list[1]"  ><!--* [stepControl]="product_Inforamtion" --->
+      <nb-step [label]="list[1] "  [stepControl]="product_Inforamtion" ><!--* [stepControl]="product_Inforamtion" --->
         <ng-template #labelTwo>Product Info</ng-template>
         <form action="post" [formGroup]="product_Inforamtion">
-          <div class="form-group">
-            <div class="d-flex justify-content-start">
-              <label for="productName" class="label">Product name</label>
-            </div>
-            <input type="text" nbInput fullWidth id="productName" placeholder="Product Name"  formControlName="productName" >
-            <!--* error Message --->
-              <div *ngIf="ProductName.invalid && (ProductName.dirty || ProductName.touched)">
-                <nb-alert  class="msgError" *ngIf="ProductName.errors.required"> *Please enter product name !</nb-alert>
-                <nb-alert  class="msgError" *ngIf="ProductName.errors.inputIsSpace"> *Invalid ProductName !</nb-alert>
-                <nb-alert *ngIf="ProductName.errors.minlength" class="msgError" >product name should be at least{{ProductName.errors.minlength.requiredLength}} Character </nb-alert>
-                <nb-alert *ngIf="ProductName.errors.maxlength" class="msgError">
-                  product name should be at most {{ProductName.errors.maxlength.requiredLength}} Character
-                </nb-alert>
+            <div class="row">
+               <div class="col-12 col-md-6">
+                <div class="form-group">
+                  <div class="d-flex justify-content-start">
+                    <label for="productName" class="label">Product name</label>
+                  </div>
+                  <input type="text" nbInput fullWidth id="productName" placeholder="Product Name"  formControlName="productName" >
+                  <!--* error Message --->
+                    <div  *ngIf="ProductName.invalid && (ProductName.dirty || ProductName.touched)">
+                      <nb-alert  class="msgError" *ngIf="ProductName.errors.required"> *Please enter product name !</nb-alert>
+                      <nb-alert  class="msgError" *ngIf="ProductName.errors.inputIsSpace"> *Invalid ProductName !</nb-alert>
+                      <nb-alert *ngIf="ProductName.errors.minlength" class="msgError" >product name should be at least{{ProductName.errors.minlength.requiredLength}} Character </nb-alert>
+                      <nb-alert *ngIf="ProductName.errors.maxlength" class="msgError">
+                        product name should be at most {{ProductName.errors.maxlength.requiredLength}} Character
+                      </nb-alert>
 
+                     </div>
+                  <!--* error Message --->
+                </div>
                </div>
-            <!--* error Message --->
-          </div>
+
+               <div class="col-12 col-md-6">
+                <div class="form-group">
+                  <div class="d-flex justify-content-start">
+                    <label for="brand" class="label">Brand</label>
+                  </div>
+                  <input type="text" nbInput fullWidth id="brand" placeholder="Brand" formControlName="brand" />
+              <!--* error Message --->
+                <div  *ngIf="Brand.invalid && (Brand.dirty || Brand.touched)">
+                <nb-alert outline="danger" class="msgError" *ngIf="Brand.errors.required"> *Please enter product brand !</nb-alert>
+                <nb-alert outline="danger" class="msgError" *ngIf="Brand.errors.inputIsSpace"> *Invalid Brand  !</nb-alert>
+               </div>
+              <!--* error Message end --->
+                </div>
+
+              </div>
+            </div>
 
 
           <div class="form-group">
@@ -68,7 +88,7 @@
             </div>
             <textarea rows="5" nbInput fullWidth placeholder="Product Description" formControlName="productDescription"></textarea>
           <!--* error Message --->
-             <div class="d-flex" *ngIf="ProductDescription.invalid && (ProductDescription.dirty || ProductDescription.touched)">
+             <div  *ngIf="ProductDescription.invalid && (ProductDescription.dirty || ProductDescription.touched)">
             <nb-alert outline="danger" class="msgError" *ngIf="ProductDescription.errors.required"> *Please enter product description !</nb-alert>
             <nb-alert outline="danger" class="msgError" *ngIf="ProductDescription.errors.minlength"> *product description at least 50 character !</nb-alert>
             <nb-alert outline="danger" class="msgError" *ngIf="ProductDescription.errors.maxlength"> *product description more than 300!</nb-alert>
@@ -84,15 +104,15 @@
             <div class="col-12 col-md-6">
               <div class="form-group">
                 <div class="d-flex justify-content-start">
-                  <label for="brand" class="label">Brand</label>
+                  <label for="quantity" class="label">Quantity</label>
                 </div>
-                <input type="text" nbInput fullWidth id="brand" placeholder="Brand" formControlName="brand" />
-            <!--* error Message --->
-              <div class="d-flex justify-content-between" *ngIf="Brand.invalid && (Brand.dirty || Brand.touched)">
-              <nb-alert outline="danger" class="msgError" *ngIf="Brand.errors.required"> *Please enter product brand !</nb-alert>
-              <nb-alert outline="danger" class="msgError" *ngIf="Brand.errors.inputIsSpace"> *Invalid Brand  !</nb-alert>
-             </div>
-            <!--* error Message end --->
+                <input type="number" nbInput fullWidth id="quantity" min="1" placeholder="quantity" formControlName="quantity" />
+                  <!--* error Message --->
+                   <div  *ngIf="Quantity.invalid && (Quantity.dirty || Quantity.touched)">
+                         <nb-alert outline="danger" class="msgError" *ngIf="Quantity.errors.required"> *Please enter the Number of Quntity !</nb-alert>
+                         <nb-alert outline="danger" class="msgError" *ngIf="Quantity.errors.min"> *Invalid Quantity at least 1  !</nb-alert>
+                     </div>
+                  <!--* error Message end --->
               </div>
 
             </div>
@@ -125,44 +145,43 @@
 
           <!-- ----------------------------------------------------------------------- -->
 
-          <div class="form-group">
-            <div class="d-flex justify-content-start">
-              <label for="size" class="label">Size</label>
-            </div>
-            <input type="text" nbInput fullWidth id="size" placeholder="Size" formControlName="size" />
-             <!--* error Message --->
-              <div class="d-flex justify-content-between" *ngIf="Size.invalid && (Size.dirty || Size.touched)">
-                     <nb-alert outline="danger" class="msgError" *ngIf="Size.errors.required"> *Please enter product Size !</nb-alert>
-                     <nb-alert outline="danger" class="msgError" *ngIf="Size.errors.inputIsSpace"> *Invalid Size  !</nb-alert>
-               </div>
-             <!--* error Message end --->
-          </div>
-
-          <div class="form-group">
-            <div class="d-flex justify-content-start">
-              <label for="weight" class="label">Weight</label>
-            </div>
-            <input type="text" nbInput fullWidth id="weight" placeholder="Weight" formControlName="weight" />
-               <!--* error Message --->
-                 <div class="d-flex justify-content-between" *ngIf="Weight.invalid && (Weight.dirty || Weight.touched)">
-                   <nb-alert outline="danger" class="msgError" *ngIf="Weight.errors.required"> *Please enter product Weight !</nb-alert>
-                   <nb-alert outline="danger" class="msgError" *ngIf="Weight.errors.inputIsSpace"> *Invalid Weight  !</nb-alert>
+            <div class="row">
+                 <div class="col-12 col-md-6">
+                  <div class="form-group">
+                    <div class="d-flex justify-content-start">
+                      <label for="size" class="label">Size</label>
+                    </div>
+                    <input type="text" nbInput fullWidth id="size" placeholder="Size" formControlName="size" />
+                     <!--* error Message --->
+                      <div  *ngIf="Size.invalid && (Size.dirty || Size.touched)">
+                             <nb-alert outline="danger" class="msgError" *ngIf="Size.errors.required"> *Please enter product Size !</nb-alert>
+                             <nb-alert outline="danger" class="msgError" *ngIf="Size.errors.inputIsSpace"> *Invalid Size  !</nb-alert>
+                       </div>
+                     <!--* error Message end --->
                   </div>
-                <!--* error Message end --->
-          </div>
 
-          <div class="form-group">
-            <div class="d-flex justify-content-start">
-              <label for="quantity" class="label">Quantity</label>
-            </div>
-            <input type="number" nbInput fullWidth id="quantity" min="1" placeholder="quantity" formControlName="quantity" />
-              <!--* error Message --->
-               <div class="d-flex justify-content-between" *ngIf="Quantity.invalid && (Quantity.dirty || Quantity.touched)">
-                     <nb-alert outline="danger" class="msgError" *ngIf="Quantity.errors.required"> *Please enter the Number of Quntity !</nb-alert>
-                     <nb-alert outline="danger" class="msgError" *ngIf="Quantity.errors.minlength"> *Invalid Quantity at least 1  !</nb-alert>
                  </div>
-              <!--* error Message end --->
-          </div>
+
+                 <div class="col-12 col-md-6">
+                  <div class="form-group">
+                    <div class="d-flex justify-content-start">
+                      <label for="weight" class="label">Weight</label>
+                    </div>
+                    <input type="number" nbInput fullWidth id="weight" min="10" placeholder="Weight gm" formControlName="weight" />
+                       <!--* error Message --->
+                         <div  *ngIf="Weight.invalid && (Weight.dirty || Weight.touched)">
+                           <nb-alert outline="danger" class="msgError" *ngIf="Weight.errors.required"> *Please enter product Weight !</nb-alert>
+                           <nb-alert outline="danger" class="msgError" *ngIf="Weight.errors.min"> *product Weight at least 10 Gm !</nb-alert>
+
+                          </div>
+                        <!--* error Message end --->
+                  </div>
+
+                 </div>
+            </div>
+
+
+
 
           <div class="form-group">
             <div class="d-flex justify-content-start">
@@ -170,7 +189,7 @@
             </div>
             <input type="text" nbInput fullWidth id="sku" placeholder="Sku" formControlName="sku" />
              <!--* error Message --->
-               <div class="d-flex justify-content-between" *ngIf="Sku.invalid && (Sku.dirty || Sku.touched)">
+               <div  *ngIf="Sku.invalid && (Sku.dirty || Sku.touched)">
                 <nb-alert outline="danger" class="msgError" *ngIf="Sku.errors.inputIsSpace"> *Invalid Serial Number !</nb-alert>
                 </div>
              <!--* error Message end --->
@@ -187,10 +206,10 @@
       <nb-step [label]="list[2]" id="editor">
         <label for="proudactSpecification" class="label">Product Specification</label>
        <div>
-        <ckeditor id="proudactSpecification" [config]="{ extraPlugins: 'divarea', height: '320' }" #tt7></ckeditor>
+        <ckeditor id="proudactSpecification" [config]="{ extraPlugins: 'divarea', height: '320' }" (editorChange)="onChange($event)"></ckeditor>
 
        </div>
-       <button (click)="showdata(tt7)">ok</button>
+
        <div class="d-flex justify-content-center mt-3">
         <button nbButton nbStepperPrevious>prev</button>
         <button nbButton nbStepperNext>next</button>
@@ -198,18 +217,17 @@
       </nb-step>
       <!--=============================== product Prices =============================-->
 
-      <nb-step [label]="list[3]">
-        <form action="post" [formGroup]="product_price">
+      <nb-step [label]="list[3]" [stepControl]="product_price">
+        <form action="post" [formGroup]="product_price" >
           <div class="form-group">
             <div class="d-flex justify-content-start">
               <label for="price" class="label">Price</label>
             </div>
             <input type="number" nbInput fullWidth id="price" placeholder="Price" min="0" formControlName="price" />
                     <!--* error Message --->
-                    <div class="d-flex justify-content-between" *ngIf="Price.invalid && (Price.dirty || Price.touched)">
+                    <div  *ngIf="Price.invalid && (Price.dirty || Price.touched)">
                       <nb-alert outline="danger" class="msgError" *ngIf="Price.errors.required"> *Please enter the product price !</nb-alert>
-                      <nb-alert outline="danger" class="msgError" *ngIf="Price.errors.inputIsSpace"> *Invalid price !</nb-alert>
-                      <nb-alert outline="danger" class="msgError" *ngIf="Price.errors.minlength"> **product price at least 1 EL !</nb-alert>
+                      <nb-alert outline="danger" class="msgError" *ngIf="Price.errors.min"> **product price at least 1 EL !</nb-alert>
                       </div>
                    <!--* error Message end --->
           </div>
@@ -223,8 +241,8 @@
                 </div>
                 <input type="number" nbInput fullWidth id="discount" placeholder="discount" min="0"  #dis formControlName="discount" />
                        <!--* error Message --->
-                       <div class="d-flex justify-content-between" *ngIf="Discount.invalid && (Discount.dirty || Discount.touched)">
-                           <nb-alert outline="danger" class="msgError" *ngIf="Discount.errors.minlength"> **product discount at least 2% ! !</nb-alert>
+                       <div  *ngIf="Discount.invalid && (Discount.dirty || Discount.touched)">
+                           <nb-alert outline="danger" class="msgError" *ngIf="Discount.errors.min"> **product discount at least 2% !</nb-alert>
                         </div>
                      <!--* error Message end --->
               </div>
@@ -237,11 +255,7 @@
                 </div>
                 <input id="datepicker" nbInput fullWidth placeholder="Range Picker" [nbDatepicker]="rangepicker" [disabled]="dis.value == 0" >
                 <nb-rangepicker   (rangeChange)="handleDateChange($event)"  [min]="min" [max]="max" #rangepicker></nb-rangepicker>
-                    <!--* error Message --->
-                    <div class="d-flex justify-content-between" *ngIf="DiscountDate.invalid && (DiscountDate.dirty || DiscountDate.touched)">
-                      <nb-alert outline="danger" class="msgError" *ngIf="DiscountDate.errors.inputIsSpace"> **product discount date invalid ! !</nb-alert>
-                   </div>
-                <!--* error Message end --->
+
               </div>
             </div>
 
@@ -251,28 +265,35 @@
 
         <div class="d-flex justify-content-center mt-3">
           <button nbButton nbStepperPrevious>prev</button>
-          <button nbButton nbStepperNext>next</button>
+          <button nbButton nbStepperNext >next</button>
          </div>
       </nb-step>
       <!--===============================Images =============================-->
 
-      <nb-step [label]="list[4]">
+      <nb-step [label]="list[4]"   ><!--* [stepControl]="images.length ==0" --->
           <div class="d-flex  flex-wrap">
-            <div class=" image " *ngFor="let item of images; let i=index" [style.backgroundImage]="'url('+item+')'">
+            <div class=" image " *ngFor="let item of images; let i=index" [style.backgroundImage]="'url('+item+')'" >
               <span class="badge badge-pill badge-dark "(click)="deleteImage(i)" ><i class="fas fa-times"></i></span>
 
             </div>
 
             <button nbButton class="addImage" (click)="upload.click()">
                  <i class="fas fa-plus"></i>
-                 <input type="file" hidden #upload  (change)="previewImge($event)"/>
+                 <input type="file" hidden #upload  (change)="previewImge($event)" multiple />
             </button>
           </div>
 
         <div class="d-flex justify-content-center mt-3">
           <button nbButton nbStepperPrevious>prev</button>
-          <button nbButton nbStepperNext>next</button>
+          <button nbButton nbStepperNext >next</button>
          </div>
+      </nb-step>
+
+      <nb-step  [hidden]="true" label="Finish">
+        <div class="step-container">
+          <h3>Wizard completed!</h3>
+          <button nbButton (click)="createProduct()">Created</button>
+        </div>
       </nb-step>
 
     </nb-stepper>

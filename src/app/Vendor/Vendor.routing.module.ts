@@ -9,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EditProductComponent } from './Product/EditProduct/EditProduct.component';
 import { ManageImageComponent } from './Product/ManageImage/ManageImage.component';
+import { FormEditProductComponent } from './Product/EditProduct/FormEditProduct/FormEditProduct.component';
 
 
 const routes: Routes = [
@@ -19,10 +20,10 @@ const routes: Routes = [
    /*================================ Product ==============================*/
 
        {path:"product/add",component:AddProductComponent},
-       {
-         path:"product/edit",component:EditProductComponent},
-       {
-         path:"product/images",component:ManageImageComponent},
+       {path:"product/edit",component:EditProductComponent},
+    
+       {path:"product/editForm/:id",component:FormEditProductComponent},
+       {path:"product/images",component:ManageImageComponent},
    /*================================ order ==============================*/
 
       {path:"order",component:OrderComponent},

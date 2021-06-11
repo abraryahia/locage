@@ -1,3 +1,4 @@
+import { NbComponentStatus, NbDateService, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { CustomValidator } from './../../../common_validator/CustomValidator';
 import { FormBuilder, FormGroup, RequiredValidator, Validators } from '@angular/forms';
 import { CategoryService } from './../../../Services/Category.service';
@@ -5,7 +6,6 @@ import { Category } from './../../../Models/Category';
 import { Product } from './../../../Models/Product';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { ProductService } from '../../../Services/Product.service';
-import { NbDateService } from '@nebular/theme';
 import { NbWindowService } from '@nebular/theme';
 import * as moment from 'moment';
 
@@ -25,43 +25,19 @@ export class AddProductComponent implements OnInit {
     "Images"
   ]
 
-  // this object empty to fill with data ^_^
-  product: Product = {
-    id: null,
-    title: null,
-    color: [],
-    description: null,
-    price: null,
-    subcategory: null,
-    vendor: null,
-    sku: null,
-    quantity: null,
-    size: null,
-    Weight: null,
-    photos: [],
-    rating: null,
-    UnitePerOrder: null,
-    discount: null,
-    brand: null,
-    proudactSpecification: null,
-    discountDate: null,
 
-  };
-  dataRange
   selectedMainCategory: Category = null;
   Selectedsubcategory: Category = null;
   Categories: Category[];
   Colors: any[] = [];
   customColor: string[] = ["red", "black", "green", "blue"] //this array to custom color
   images: string[] = [];
-  startDate: any = null;
-  endDate: any = null;
-  dates: string[] = [];
   selectedColor = null;  //colorpacker
-
+  date:any;
+  descriptionSpecifiction:any;
   min: Date;  //min range
   max: Date;  //max range
-
+ product = new FormData();
   product_Inforamtion: FormGroup;
   product_price: FormGroup;
 
@@ -75,7 +51,8 @@ export class AddProductComponent implements OnInit {
     private _product: ProductService,
     protected dateService: NbDateService<Date>,
     private window: NbWindowService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private toast:NbToastrService) {
 
     /*-------------------------------- validation for product information  ------------------------------*/
 
@@ -88,7 +65,7 @@ export class AddProductComponent implements OnInit {
 
       size: ['', [Validators.required, CustomValidator.checkSpaceInInput]],
 
-      weight: ['', [Validators.required, CustomValidator.checkSpaceInInput]],
+      weight: ['', [Validators.required, Validators.min(10),Validators.max(1000000)]],
 
       quantity: ['', [Validators.required, Validators.min(1)]],
 
@@ -101,7 +78,7 @@ export class AddProductComponent implements OnInit {
     this.product_price = this.fb.group({
       price: ['', [Validators.required, Validators.min(1)]],
       discount: [null, [Validators.min(2)]],
-      discountdate: ['', [CustomValidator.checkSpaceInInput]]
+
     })
 
   }
@@ -115,22 +92,24 @@ export class AddProductComponent implements OnInit {
      *========================================================================**/
     this.min = this.dateService.addMonth(this.dateService.today(), 0);
     this.max = this.dateService.addMonth(this.dateService.today(), 2);
+
+
+
+
+
+
   }
   handleDateChange(event) {
     console.log('ev', event);
     console.log('----------');
 
-    let start = moment.utc(event.start, "DD-MM-YYYY", true).toDate().toLocaleDateString();
-    this.startDate = start;
-    let end = moment.utc(event.end, "DD-MM-YYYY", true).toDate().toLocaleDateString();
-    this.endDate = end;
-    this.dates.push(this.startDate);
-    this.dates.push(this.endDate);
-    console.log('array', this.dates);
-    // console.log('----------');
-    // console.log(this.startDate);
-    // console.log('----------');
-    // console.log(this.endDate);
+    let start = moment.utc(event.start, "DD-MM-YYYY", true).toDate();
+
+    let end = moment.utc(event.end, "DD-MM-YYYY", true).toDate();
+    this.date={start:start , end :end};
+    console.log("__________________");
+
+     console.log(this.date);
 
   }
 
@@ -168,10 +147,14 @@ export class AddProductComponent implements OnInit {
 
   previewImge(event) {
 
-    let file = event.target.files[0] as File;
+    //let file = event.target.files[0] as File;
+    let files = event.target.files;
+    for (let i = 0; i < files.length; i++) {
+    this.product.append('photos',files[i], files[i].name);
+    this.images.push(URL.createObjectURL(files[i]));
+    }
 
-    this.images.push(URL.createObjectURL(file));
-
+   //this.product.append('photos', files, files.name);
   }
 
   deleteImage(_img) {
@@ -224,10 +207,60 @@ export class AddProductComponent implements OnInit {
   }
 
 
+    onChange(  _ckEditor  ) {
+		this.descriptionSpecifiction = _ckEditor.editor.getData();
 
-  showdata(data) {
 
-    console.log(data);
-  }
+   	}
+
+    createProduct()
+    {
+
+              this.product.append('title', this.ProductName.value);
+              this.product.append('description', this.ProductDescription.value);
+              this.Colors.forEach(element => {
+                this.product.append('color', element);
+              });
+              this.product.append('price',this.Price.value);
+              this.product.append('brand',this.Brand.value);
+              this.product.append('Weight',this.Weight.value);
+              this.product.append('size',this.Size.value);
+              this.product.append('quantity',this.Quantity.value);
+              this.product.append( 'discount',this.Discount.value);
+              this.product.append('discountDate.start',this.date.start);
+              this.product.append('discountDate.end',this.date.end);
+              this.product.append('productSpecifications',this.descriptionSpecifiction);
+             // this.product.append(  'rating',null);
+              this.product.append('sku',this.Sku.value);
+
+              console.log(this.product);
+
+
+
+               this._product.addProduct(this.product);
+
+                this.showToast("success","Created valid  ","your Product is Created ");
+
+
+
+     }
+
+
+     private showToast(type: NbComponentStatus, title: string, body: string) {
+      const config = {
+        status: type,
+        destroyByClick: true,
+        duration: 2000,
+        hasIcon: true,
+        position: NbGlobalPhysicalPosition.TOP_RIGHT,
+        preventDuplicates: true,
+      };
+      const titleContent = title ? `${title}` : "";
+
+      this.toast.show(body, `${titleContent}`, config);
+    }
+
+
+
 
 }

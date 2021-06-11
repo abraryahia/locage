@@ -1,3 +1,37 @@
-<p>
-  ManageImage works!
-</p>
+<nb-card accent="info" *ngFor="let productItem of allProducts; let pro=index">
+  <nb-card-header >{{productItem.title}}</nb-card-header>
+  <nb-card-body>
+
+    <div class="">
+      <nb-card class="list-card" size="small" >
+
+        <nb-list class="border-0">
+          <nb-list-item  class="border-0" *ngFor="let item of productItem?.photos; let img=index">
+           <div class="d-flex justify-content-between pl-5 pr-5">
+            <div class=" image "  [style.backgroundImage]="'url('+item+')'" > </div>
+            <div class="d-flex justify-content-center ">
+              <nb-actions >
+
+                <nb-action   >
+                  <nb-action class="iconbtn" icon="edit-outline" (click)="upload.click()">
+                    <input type="file" hidden #upload  (change)="updatImage($event,pro,img)" />
+                  </nb-action>
+                </nb-action>
+
+                <nb-action  >
+                  <nb-action  class="iconbtn" icon="trash-2-outline" (click)="deleteImage(pro,img)" ></nb-action>
+
+                </nb-action>
+              </nb-actions>
+            </div>
+           </div>
+          </nb-list-item>
+        </nb-list>
+      </nb-card>
+    </div>
+
+
+
+
+  </nb-card-body>
+</nb-card>
