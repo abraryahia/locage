@@ -20,8 +20,8 @@ export class AddProductComponent implements OnInit {
   list = [
     "chooses Category",
     "product Inforamtion",
-    "More product information",
-    "product Prices",
+    "More information",
+    " Prices",
     "Images"
   ]
 

@@ -47,8 +47,8 @@ export const routes: Routes = [
   },
   { path: 'users', loadChildren : () => import('./user/user.module').then(m => m.UserModule) },
   {path:'vendor',loadChildren :()=>import('./Vendor/Vendor.module').then(m=> m.VendorModule) },
-  { path: '', redirectTo: 'pages', pathMatch: 'full' },
-  { path: '**', redirectTo: 'pages' },
+  { path: '', redirectTo: 'vendor', pathMatch: 'full' },
+  { path: '**', redirectTo: 'vendor' },
 ];
 
 const config: ExtraOptions = {

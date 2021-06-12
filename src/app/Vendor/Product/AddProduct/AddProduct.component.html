@@ -270,7 +270,7 @@
       </nb-step>
       <!--===============================Images =============================-->
 
-      <nb-step [label]="list[4]"   ><!--* [stepControl]="images.length ==0" --->
+      <nb-step [label]="list[4]" [stepControl]="images.length ==0" ><!--* [stepControl]="images.length ==0" --->
           <div class="d-flex  flex-wrap">
             <div class=" image shadow " *ngFor="let item of images; let i=index" [style.backgroundImage]="'url('+item+')'" >
               <span class="badge badge-pill badge-dark "(click)="deleteImage(i)" ><i class="fas fa-times"></i></span>
@@ -292,7 +292,7 @@
       <nb-step  [hidden]="true" label="Finish">
         <div class="step-container">
           <h3>Wizard completed!</h3>
-          <button nbButton (click)="createProduct()">Created</button>
+          <button nbButton (click)="createProduct()">Create</button>
         </div>
       </nb-step>
 
