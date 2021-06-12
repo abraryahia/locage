@@ -18,7 +18,7 @@ export class FormEditProductComponent implements OnInit {
 
   product:Product;
   selectedColor = null;  //colorpacker
-  customColor: string[] = ["red", "black", "green", "blue"] //this array to custom color
+  customColor: string[] = ["red", "black", "green", "blue","#f4f9f9","#aaaaaa"] //this array to custom color
   min: Date;  //min range
   max: Date;  //max range
   formEdit: FormGroup;
@@ -73,7 +73,7 @@ export class FormEditProductComponent implements OnInit {
       console.log(data);
       this.product = data;
   if (data?.discountDate) {
-    
+
     let start = new Date(data.discountDate.start);
     let end = new Date(data.discountDate.end);
     data.discountDate = {start, end}
@@ -98,10 +98,10 @@ export class FormEditProductComponent implements OnInit {
     let start = moment.utc(event.start, "DD-MM-YYYY", true).toDate();
 
     if (event.end) {
-      
+
       let end = moment.utc(event.end, "DD-MM-YYYY", true).toDate();
       console.log(start);
-      
+
       this.formEdit.get('discountDate').setValue({start:start , end :end})
       console.log(this.formEdit.get('discountDate').value);
     }
@@ -115,7 +115,7 @@ export class FormEditProductComponent implements OnInit {
     }
 
     changeColorHandeler(_color) {
-  
+
       this.selectedColor = _color;
     }
 
@@ -140,7 +140,7 @@ export class FormEditProductComponent implements OnInit {
       let data= this.formEdit.value;
       this._product.editProduct(data);
       console.log(data);
-      
+
       this.showToast("success","Updated Valid  ","your Product is Updated ");
 
 
@@ -157,10 +157,10 @@ export class FormEditProductComponent implements OnInit {
         preventDuplicates: true,
       };
       const titleContent = title ? `${title}` : "";
-  
+
       this.toast.show(body, `${titleContent}`, config);
     }
-  
+
 
 
 }

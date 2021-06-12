@@ -45,9 +45,9 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: '', redirectTo: 'pages', pathMatch: 'full' },
   { path: 'users', loadChildren : () => import('./user/user.module').then(m => m.UserModule) },
   {path:'vendor',loadChildren :()=>import('./Vendor/Vendor.module').then(m=> m.VendorModule) },
+  { path: '', redirectTo: 'pages', pathMatch: 'full' },
   { path: '**', redirectTo: 'pages' },
 ];
 

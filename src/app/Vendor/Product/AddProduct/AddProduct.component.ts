@@ -30,7 +30,7 @@ export class AddProductComponent implements OnInit {
   Selectedsubcategory: Category = null;
   Categories: Category[];
   Colors: any[] = [];
-  customColor: string[] = ["red", "black", "green", "blue"] //this array to custom color
+  customColor: string[] = ["red", "black", "green", "blue","#f4f9f9","#aaaaaa"]  //this array to custom color
   images: string[] = [];
   selectedColor = null;  //colorpacker
   date:any;

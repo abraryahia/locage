@@ -95,16 +95,13 @@ export class EditProductComponent implements OnInit {
 
   onEdit(event){
     //editForm
-
-  //  this.route.navigateByUrl("/vendor/product/UpdateProduct/"+event.data.id);
     this.route.navigateByUrl("/vendor/product/editForm/"+event.data._id);
   }
 
   onDelete(event){
-    //this.product_service.deletProduct(event.data.id);
-    this.product_service.deletProduct(event.data._id)
-    console.log(event.data.id);
 
+    this.product_service.deletProduct(event.data._id)
+    console.log(event.data._id);
   }
 
 }
