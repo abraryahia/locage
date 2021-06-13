@@ -8,6 +8,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { ProductService } from '../../../Services/Product.service';
 import { NbWindowService } from '@nebular/theme';
 import * as moment from 'moment';
+import { SubCategory } from '../../../Models/subCategory';
 
 @Component({
   selector: 'app-AddProduct',
@@ -27,8 +28,9 @@ export class AddProductComponent implements OnInit {
 
 
   selectedMainCategory: Category = null;
-  Selectedsubcategory: Category = null;
-  Categories: Category[];
+  Selectedsubcategory: any ;
+  Categories: Category[]=[];
+  subCategory:SubCategory[]=[];
   Colors: any[] = [];
   customColor: string[] = ["red", "black", "green", "blue","#f4f9f9","#aaaaaa"]  //this array to custom color
   images: string[] = [];
@@ -86,27 +88,46 @@ export class AddProductComponent implements OnInit {
   ngOnInit() {
 
 
-    this.Categories = this._ctegory.getCategory();
+     this._ctegory.getAllCategory();
+     this._ctegory.getCategoryWithoutLoad().subscribe((c:any)=>{
+       this.Categories=c;
+       console.log("c",c);
+       console.log("category",this.Categories);
+
+
+     })
     /**========================================================================
      *                         to add range in datepacker
      *========================================================================**/
     this.min = this.dateService.addMonth(this.dateService.today(), 0);
     this.max = this.dateService.addMonth(this.dateService.today(), 2);
 
+  }//end onint
+
+  onMainCategorySelect(id){
+    this._ctegory.getSubCategoryOfMaincategory(id).subscribe((data:any)=>{
+      console.log(data.result[0].subcategories );
+
+        this.subCategory=data.result[0].subcategories;
+        this.selectedMainCategory=id;
+        console.log("sub",this.subCategory);
 
 
-
-
-
+    })
   }
+
+
   handleDateChange(event) {
     console.log('ev', event);
     console.log('----------');
+     if(event.start){
+      let start = moment.utc(event.start, "DD-MM-YYYY", true).toDate();
 
-    let start = moment.utc(event.start, "DD-MM-YYYY", true).toDate();
+      let end = moment.utc(event.end, "DD-MM-YYYY", true).toDate();
+      this.date={start:start , end :end};
 
-    let end = moment.utc(event.end, "DD-MM-YYYY", true).toDate();
-    this.date={start:start , end :end};
+     }
+
     console.log("__________________");
 
      console.log(this.date);
@@ -215,6 +236,8 @@ export class AddProductComponent implements OnInit {
 
     createProduct()
     {
+      console.log(this.Selectedsubcategory);
+      console.log("type: ",typeof this.Selectedsubcategory )
 
               this.product.append('title', this.ProductName.value);
               this.product.append('description', this.ProductDescription.value);
@@ -226,20 +249,17 @@ export class AddProductComponent implements OnInit {
               this.product.append('Weight',this.Weight.value);
               this.product.append('size',this.Size.value);
               this.product.append('quantity',this.Quantity.value);
-              this.product.append( 'discount',this.Discount.value);
-              this.product.append('discountDate.start',this.date.start);
-              this.product.append('discountDate.end',this.date.end);
+              this.product.append( 'discount',this.Discount?.value);
+              this.product.append('discountDate.start',this.date?.start);
+              this.product.append('discountDate.end',this.date?.end);
               this.product.append('productSpecifications',this.descriptionSpecifiction);
+              this.product.append('subcategoryId',this.Selectedsubcategory)
              // this.product.append(  'rating',null);
               this.product.append('sku',this.Sku.value);
 
               console.log(this.product);
-
-
-
                this._product.addProduct(this.product);
-
-                this.showToast("success","Created valid  ","your Product is Created ");
+               this.showToast("success","Operation Created valid  ","your Product is Created ");
 
 
 
@@ -256,7 +276,6 @@ export class AddProductComponent implements OnInit {
         preventDuplicates: true,
       };
       const titleContent = title ? `${title}` : "";
-
       this.toast.show(body, `${titleContent}`, config);
     }
 

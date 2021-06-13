@@ -67,7 +67,7 @@ export class EditProductComponent implements OnInit {
           } else {
            let start= new Date(discount.start);
            let end = new Date(discount.end);
-            return `${start.toLocaleDateString()} to ${end.toLocaleDateString()}`;
+            return `from ${start.toLocaleDateString()} to ${end.toLocaleDateString()}`;
           }
         },
       },

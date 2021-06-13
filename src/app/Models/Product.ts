@@ -4,7 +4,7 @@ export interface Product {
   color:string[];
   description:string;
   price:number;
-  subcategory:any;
+  subcategoryId:any;
   vendor:any;
   sku:string;
   quantity:number;

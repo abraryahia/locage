@@ -1,5 +1,6 @@
 export interface SubCategory {
+  _id:any;
   name:string;
-  description:string;
-  category:any;
+  photo:string;
+  categoryId:any;
 }

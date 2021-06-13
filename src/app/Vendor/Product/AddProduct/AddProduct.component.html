@@ -12,8 +12,8 @@
                <nb-select-label class="text-primary"> Main Category</nb-select-label>
             </div>
             <div>
-              <nb-select fullWidth selected="0" #main (selectedChange)="selectedMainCategory = Categories[ main.selected]">
-                <nb-option value="{{i}}" *ngFor="let item of Categories; let i=index">{{item.main}}</nb-option>
+              <nb-select fullWidth selected="0" #main (selectedChange)="onMainCategorySelect(main.selected)">
+                <nb-option value="{{item._id}}" *ngFor="let item of Categories; let i=index">{{item.name}}</nb-option>
 
               </nb-select>
             </div>
@@ -25,8 +25,8 @@
              <nb-select-label class="text-primary"> Sub Category</nb-select-label>
           </div>
           <div>
-            <nb-select fullWidth selected="1" #subCategory  (selectedChange)=" Selectedsubcategory= selectedMainCategory.sub[subCategory.selected]">
-              <nb-option value="{{i}}" *ngFor="let item of selectedMainCategory.sub; let i=index">{{item}}</nb-option>
+            <nb-select fullWidth selected="1" #sub  (selectedChange)=" Selectedsubcategory= sub.selected">
+              <nb-option value="{{item._id}}" *ngFor="let item of subCategory; let i=index">{{item.name}}</nb-option>
 
             </nb-select>
           </div>
