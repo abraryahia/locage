@@ -19,8 +19,7 @@ private readonly apiCategory="https://locage.herokuapp.com/api/v1/category";
     getAllCategory(){
 
       let headers = new HttpHeaders({
-        'authorization': "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbmF3YWhlZWRAZ21haWwuY29tIiwiaWQiOiI2MGJmYzZhNDczNDY5ZjAwMmU4NGRhMGIiLCJpYXQiOjE2MjM1OTAyNjcsImV4cCI6MTYyMzY3NjY2N30.M0MB35G-CQTdBUytFju8clVFMWQOjyQp3usmZR9xI-U"
-
+        'authorization': "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbmF3YWhlZWRAZ21haWwuY29tIiwiaWQiOiI2MGJmYzZhNDczNDY5ZjAwMmU4NGRhMGIiLCJpYXQiOjE2MjM5MjM5MTksImV4cCI6MTYyNDAxMDMxOX0.DewOuZxEgMPlXosBQzMT8wlzhd44gdjNo1dfsc6xL7o"
       })
 
       this.http.get(this.apiCategory,{headers}).subscribe((c:any)=>{
@@ -32,8 +31,7 @@ private readonly apiCategory="https://locage.herokuapp.com/api/v1/category";
 
     getSubCategoryOfMaincategory(categorId){
       let headers = new HttpHeaders({
-        'authorization': "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbmF3YWhlZWRAZ21haWwuY29tIiwiaWQiOiI2MGJmYzZhNDczNDY5ZjAwMmU4NGRhMGIiLCJpYXQiOjE2MjM1OTAyNjcsImV4cCI6MTYyMzY3NjY2N30.M0MB35G-CQTdBUytFju8clVFMWQOjyQp3usmZR9xI-U"
-
+        'authorization': "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbmF3YWhlZWRAZ21haWwuY29tIiwiaWQiOiI2MGJmYzZhNDczNDY5ZjAwMmU4NGRhMGIiLCJpYXQiOjE2MjM5MjM5MTksImV4cCI6MTYyNDAxMDMxOX0.DewOuZxEgMPlXosBQzMT8wlzhd44gdjNo1dfsc6xL7o"
       })
      return this.http.get(this.apiCategory+"/"+categorId,{headers});
     }

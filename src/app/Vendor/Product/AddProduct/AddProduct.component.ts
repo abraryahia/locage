@@ -125,6 +125,7 @@ export class AddProductComponent implements OnInit {
 
       let end = moment.utc(event.end, "DD-MM-YYYY", true).toDate();
       this.date={start:start , end :end};
+        console.log(this.date);
 
      }
 
@@ -249,7 +250,7 @@ export class AddProductComponent implements OnInit {
               this.product.append('Weight',this.Weight.value);
               this.product.append('size',this.Size.value);
               this.product.append('quantity',this.Quantity.value);
-              this.product.append( 'discount',this.Discount?.value);
+              this.product.append( 'discount',this.Discount?.value || 0);
               this.product.append('discountDate.start',this.date?.start);
               this.product.append('discountDate.end',this.date?.end);
               this.product.append('productSpecifications',this.descriptionSpecifiction);
@@ -261,7 +262,7 @@ export class AddProductComponent implements OnInit {
                this._product.addProduct(this.product);
                this.showToast("success","Operation Created valid  ","your Product is Created ");
 
-
+               console.log(this.product);
 
      }
 

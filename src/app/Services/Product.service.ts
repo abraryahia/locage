@@ -20,7 +20,7 @@ private readonly api ='https://locage.herokuapp.com/api/v1/products';
 
 getProducts(){
   let headers = new HttpHeaders({
-    'authorization': "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbmF3YWhlZWRAZ21haWwuY29tIiwiaWQiOiI2MGJmYzZhNDczNDY5ZjAwMmU4NGRhMGIiLCJpYXQiOjE2MjM1OTAyNjcsImV4cCI6MTYyMzY3NjY2N30.M0MB35G-CQTdBUytFju8clVFMWQOjyQp3usmZR9xI-U"
+    'authorization': "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbmF3YWhlZWRAZ21haWwuY29tIiwiaWQiOiI2MGJmYzZhNDczNDY5ZjAwMmU4NGRhMGIiLCJpYXQiOjE2MjM5MjM5MTksImV4cCI6MTYyNDAxMDMxOX0.DewOuZxEgMPlXosBQzMT8wlzhd44gdjNo1dfsc6xL7o"
   })
   return this.http.get<{product:Product[]}>(this.api+'/vendor?page=1&limit=10',{headers})
   .pipe(map((pro:any)=>{
@@ -74,7 +74,7 @@ private getHeadders( incomingHeaders?: HttpHeaders ): { headers: HttpHeaders; } 
 getProductById(id){
   let product;
   let headers = new HttpHeaders({
-    'authorization': "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbmF3YWhlZWRAZ21haWwuY29tIiwiaWQiOiI2MGJmYzZhNDczNDY5ZjAwMmU4NGRhMGIiLCJpYXQiOjE2MjM1OTAyNjcsImV4cCI6MTYyMzY3NjY2N30.M0MB35G-CQTdBUytFju8clVFMWQOjyQp3usmZR9xI-U"
+    'authorization': "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbmF3YWhlZWRAZ21haWwuY29tIiwiaWQiOiI2MGJmYzZhNDczNDY5ZjAwMmU4NGRhMGIiLCJpYXQiOjE2MjM5MjM5MTksImV4cCI6MTYyNDAxMDMxOX0.DewOuZxEgMPlXosBQzMT8wlzhd44gdjNo1dfsc6xL7o"
   })
 return this.http.get<{product:Product}>(this.api+'/'+id,{headers});
   // this.products.find((d)=>d.id == id);
@@ -82,7 +82,7 @@ return this.http.get<{product:Product}>(this.api+'/'+id,{headers});
 
 addProduct(_product:FormData){
   let headers = new HttpHeaders({
-    'authorization': "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbmF3YWhlZWRAZ21haWwuY29tIiwiaWQiOiI2MGJmYzZhNDczNDY5ZjAwMmU4NGRhMGIiLCJpYXQiOjE2MjM1OTAyNjcsImV4cCI6MTYyMzY3NjY2N30.M0MB35G-CQTdBUytFju8clVFMWQOjyQp3usmZR9xI-U"
+    'authorization': "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbmF3YWhlZWRAZ21haWwuY29tIiwiaWQiOiI2MGJmYzZhNDczNDY5ZjAwMmU4NGRhMGIiLCJpYXQiOjE2MjM5MjM5MTksImV4cCI6MTYyNDAxMDMxOX0.DewOuZxEgMPlXosBQzMT8wlzhd44gdjNo1dfsc6xL7o"
   })
  this.http.post<{message:string,result:Product}>(this.api,_product,{headers}).subscribe((data)=>{
        this.products.push(data.result);
@@ -103,7 +103,7 @@ getProductsWithoutLoad(){
 editProduct(_product:Product){
 
   let headers = new HttpHeaders({
-    'authorization': "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbmF3YWhlZWRAZ21haWwuY29tIiwiaWQiOiI2MGJmYzZhNDczNDY5ZjAwMmU4NGRhMGIiLCJpYXQiOjE2MjM1OTAyNjcsImV4cCI6MTYyMzY3NjY2N30.M0MB35G-CQTdBUytFju8clVFMWQOjyQp3usmZR9xI-U"
+    'authorization': "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbmF3YWhlZWRAZ21haWwuY29tIiwiaWQiOiI2MGJmYzZhNDczNDY5ZjAwMmU4NGRhMGIiLCJpYXQiOjE2MjM5MjM5MTksImV4cCI6MTYyNDAxMDMxOX0.DewOuZxEgMPlXosBQzMT8wlzhd44gdjNo1dfsc6xL7o"
   })
   this.http.patch(this.api +'/'+ _product._id,_product,{headers}).subscribe((res)=>{
     console.log(res);
@@ -118,7 +118,7 @@ editProduct(_product:Product){
 }
 deletProduct(id){
   let headers = new HttpHeaders({
-    'authorization': "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbmF3YWhlZWRAZ21haWwuY29tIiwiaWQiOiI2MGJmYzZhNDczNDY5ZjAwMmU4NGRhMGIiLCJpYXQiOjE2MjM1OTAyNjcsImV4cCI6MTYyMzY3NjY2N30.M0MB35G-CQTdBUytFju8clVFMWQOjyQp3usmZR9xI-U"
+    'authorization': "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbmF3YWhlZWRAZ21haWwuY29tIiwiaWQiOiI2MGJmYzZhNDczNDY5ZjAwMmU4NGRhMGIiLCJpYXQiOjE2MjM5MjM5MTksImV4cCI6MTYyNDAxMDMxOX0.DewOuZxEgMPlXosBQzMT8wlzhd44gdjNo1dfsc6xL7o"
   })
  this.http.delete(this.api+'/'+id,{headers}).subscribe(()=>{
   let updatedproduct= this.products.filter((i)=>i._id !== id);
@@ -130,7 +130,7 @@ deletProduct(id){
 
 deletePhoto(idProduct,url){
   let headers = new HttpHeaders({
-    'authorization': "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbmF3YWhlZWRAZ21haWwuY29tIiwiaWQiOiI2MGJmYzZhNDczNDY5ZjAwMmU4NGRhMGIiLCJpYXQiOjE2MjM1OTAyNjcsImV4cCI6MTYyMzY3NjY2N30.M0MB35G-CQTdBUytFju8clVFMWQOjyQp3usmZR9xI-U"
+    'authorization': "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbmF3YWhlZWRAZ21haWwuY29tIiwiaWQiOiI2MGJmYzZhNDczNDY5ZjAwMmU4NGRhMGIiLCJpYXQiOjE2MjM5MjM5MTksImV4cCI6MTYyNDAxMDMxOX0.DewOuZxEgMPlXosBQzMT8wlzhd44gdjNo1dfsc6xL7o"
   })
 
   this.http.delete(this.api+'/'+ idProduct+'/manage-photos/'+url,{headers}).subscribe((res:any)=>{
@@ -149,7 +149,7 @@ deletePhoto(idProduct,url){
 updatePhoto(productId,img){
 
   let headers = new HttpHeaders({
-    'authorization': "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbmF3YWhlZWRAZ21haWwuY29tIiwiaWQiOiI2MGJmYzZhNDczNDY5ZjAwMmU4NGRhMGIiLCJpYXQiOjE2MjM1OTAyNjcsImV4cCI6MTYyMzY3NjY2N30.M0MB35G-CQTdBUytFju8clVFMWQOjyQp3usmZR9xI-U"
+    'authorization': "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpbmF3YWhlZWRAZ21haWwuY29tIiwiaWQiOiI2MGJmYzZhNDczNDY5ZjAwMmU4NGRhMGIiLCJpYXQiOjE2MjM5MjM5MTksImV4cCI6MTYyNDAxMDMxOX0.DewOuZxEgMPlXosBQzMT8wlzhd44gdjNo1dfsc6xL7o"
   })
 
   this.http.patch(this.api+'/'+productId+'/manage-photos',img,{headers}).subscribe((res:any)=>{
